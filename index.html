@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <title>Spark Core and BlinkM Example</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src='spectrum.js'></script>
+	<link rel='stylesheet' href='spectrum.css' />
+</script>
+</head>
+<body>
+	<p>Select BlinkM color: </p>
+	<input id='colorpicker' />
+	
+	<p>Blink: <input id='blink' type="checkbox" onchange="setblinking()" checked="true"/></p>
+	
+	<script>
+		$("#colorpicker").spectrum({
+			color: "#f00",
+			showAlpha: false,
+			showButtons: false,
+			flat: true
+		}).on("dragstop.spectrum", function(e, c) {
+			var rgb  = c.toRgb();
+			
+			setBlinkMColor(rgb);
+		});
+		
+		function setBlinkMColor(color){
+			var clr = color.r + "," + color.g + "," + color.b;
+			
+			console.log("Setting color to " + clr);
+			
+			callSparkMethod("setcolor", clr);
+		}
+		
+		function setblinking(){
+			var x=document.getElementById("blink");
+			var isblink = x.checked ? "1" : "0";
+			
+			console.log("Blink: " + x.checked);
+			
+			callSparkMethod("setblinking", isblink);
+		}
+		
+		function callSparkMethod(method, arg){
+			var deviceID = "53ff6b065067544809391287";
+			var accessToken = "a67780d614cd4453eabcbba48d77e5dd29029288";
+			
+			console.log("Calling Spark method: " + method + " with argument " + arg);
+			
+			$.post("https://api.spark.io/v1/devices/" + deviceID + "/" + method + "?access_token=" + accessToken,
+					{
+						args:arg
+					},
+					function(result){
+						console.log(result);
+					}
+				);
+		}
+	</script>
+</body>
+</html>
