@@ -1,11 +1,6 @@
 #include "blinkm.h"
 
-const boolean BLINKM_ARDUINO_POWERED = true;
-const int CMD_START_BYTE = 0x01;
-const int serBufLen = 32;
-
 int blinkm_addr = 0x09;
-byte serInBuf[serBufLen];  // array that will hold the serial input string
 int ledPin = 13;
 int r = 255;
 int g = 255;
@@ -55,13 +50,8 @@ void setup() {
 
     pinMode(ledPin, OUTPUT);
     
-    if( BLINKM_ARDUINO_POWERED ) {
-        BlinkM_beginWithPower();
-    } 
-    else {
-        BlinkM_begin();
-    }
-    
+    BlinkM_begin();
+
     delay(100);  // wait for power to stabilize
     
     BlinkM_stopScript(blinkm_addr);
