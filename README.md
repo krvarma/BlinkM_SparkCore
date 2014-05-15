@@ -4,10 +4,10 @@
 BlinkM Smart LED Library for Spark Core
 
 ###Wiring###
- 1. TMP006 Vcc to 3.3V
- 2. TMP006 GND to GND 
- 3. TMP006 SCL to D1 (with pullup resistor)
- 4. TMP006 SDA to D0 (with pullup resistor)
+ 1. BlinkM Vcc to 3.3V
+ 2. BlinkM GND to GND 
+ 3. BlinkM SCL to D1 (with pullup resistor)
+ 4. BlinkM SDA to D0 (with pullup resistor)
 
 ![Wiring][2] 
 
